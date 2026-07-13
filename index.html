@@ -198,7 +198,10 @@ function parseNum(v) {
 
 function fmt(n) {
   if (n === null) return "—";
-  return n.toFixed(PRECISION) + " g";
+  let s = n.toFixed(PRECISION);
+  // keep at least 2 decimal places, trim trailing zeros beyond that
+  s = s.replace(/(\.\d{2}\d*?)0+$/, "$1").replace(/\.$/, "");
+  return s + " g";
 }
 
 function Field({ label, value, onChange, placeholder }) {
