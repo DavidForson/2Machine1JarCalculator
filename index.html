@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Pour Split Calculator</title>
+<title>Two Machines One Jar Calculator</title>
 <style>
   :root {
     --bg: #17191b;
@@ -22,10 +22,7 @@
   }
 
   * { box-sizing: border-box; }
-
-  html {
-    -webkit-text-size-adjust: 100%;
-  }
+  html { -webkit-text-size-adjust: 100%; }
 
   body {
     margin: 0;
@@ -39,53 +36,31 @@
     min-height: 100dvh;
     display: flex;
     justify-content: center;
-    padding: 32px 16px calc(48px + env(safe-area-inset-bottom));
+    padding: 28px 16px calc(40px + env(safe-area-inset-bottom));
     padding-left: max(16px, env(safe-area-inset-left));
     padding-right: max(16px, env(safe-area-inset-right));
   }
 
-  .sheet {
-    width: 100%;
-    max-width: 480px;
-  }
+  .sheet { width: 100%; max-width: 480px; }
 
   @media (max-width: 400px) {
-    body {
-      padding-top: 20px;
-      padding-bottom: calc(36px + env(safe-area-inset-bottom));
-    }
-    h1 { font-size: 20px; }
+    body { padding-top: 18px; }
+    h1 { font-size: 19px; }
     .panel { padding: 16px; }
     .readout .value { font-size: 18px; }
-    .readout.total .value { font-size: 20px; }
   }
 
   header {
-    margin-bottom: 22px;
+    margin-bottom: 18px;
     border-bottom: 1px solid var(--panel-line);
-    padding-bottom: 16px;
-  }
-
-  .eyebrow {
-    font-family: var(--font-mono);
-    font-size: 11px;
-    letter-spacing: 0.16em;
-    text-transform: uppercase;
-    color: var(--amber);
+    padding-bottom: 14px;
   }
 
   h1 {
-    margin: 6px 0 4px;
-    font-size: 22px;
+    margin: 0;
+    font-size: 21px;
     font-weight: 600;
     letter-spacing: -0.01em;
-  }
-
-  .sub {
-    color: var(--text-dim);
-    font-size: 13px;
-    line-height: 1.5;
-    max-width: 44ch;
   }
 
   .panel {
@@ -96,18 +71,7 @@
     margin-bottom: 16px;
   }
 
-  .panel h2 {
-    font-size: 11px;
-    text-transform: uppercase;
-    letter-spacing: 0.14em;
-    color: var(--text-dim);
-    margin: 0 0 16px;
-    font-weight: 600;
-  }
-
-  .field {
-    margin-bottom: 14px;
-  }
+  .field { margin-bottom: 14px; }
   .field:last-child { margin-bottom: 0; }
 
   .field label {
@@ -115,12 +79,6 @@
     font-size: 13px;
     color: var(--text);
     margin-bottom: 6px;
-  }
-
-  .field .hint {
-    font-size: 11px;
-    color: var(--text-dim);
-    margin-top: 4px;
   }
 
   .input-row {
@@ -132,9 +90,7 @@
     padding: 0 12px;
     transition: border-color 0.15s;
   }
-  .input-row:focus-within {
-    border-color: var(--amber);
-  }
+  .input-row:focus-within { border-color: var(--amber); }
 
   .input-row input {
     flex: 1;
@@ -148,15 +104,8 @@
     font-size: 17px;
     padding: 14px 0;
     letter-spacing: 0.02em;
-    -moz-appearance: textfield;
   }
-  .input-row input::-webkit-outer-spin-button,
-  .input-row input::-webkit-inner-spin-button {
-    margin-left: 8px;
-  }
-  .input-row input::placeholder {
-    color: #4a4f45;
-  }
+  .input-row input::placeholder { color: #4a4f45; }
 
   .unit {
     font-family: var(--font-mono);
@@ -173,18 +122,7 @@
   }
   .readout:last-child { border-bottom: none; }
 
-  .readout .label {
-    font-size: 13px;
-    color: var(--text-dim);
-  }
-  .readout .label .tag {
-    display: block;
-    font-family: var(--font-mono);
-    font-size: 10px;
-    color: #5c6167;
-    letter-spacing: 0.08em;
-    margin-top: 2px;
-  }
+  .readout .label { font-size: 14px; color: var(--text); }
 
   .readout .value {
     font-family: var(--font-mono);
@@ -192,12 +130,13 @@
     color: var(--lcd-fg);
     font-variant-numeric: tabular-nums;
   }
-  .readout .value.negative {
-    color: var(--danger);
-  }
-  .readout.total .value {
-    color: var(--amber-bright);
-    font-size: 22px;
+  .readout .value.negative { color: var(--danger); }
+
+  .placeholder-note {
+    color: var(--text-dim);
+    font-size: 13px;
+    font-family: var(--font-mono);
+    padding: 4px 0;
   }
 
   .check {
@@ -205,9 +144,8 @@
     padding: 10px 12px;
     border-radius: 6px;
     font-family: var(--font-mono);
-    font-size: 12px;
-    display: flex;
-    justify-content: space-between;
+    font-size: 13px;
+    text-align: center;
   }
   .check.ok {
     background: rgba(111,168,122,0.1);
@@ -218,21 +156,6 @@
     background: rgba(194,80,63,0.1);
     color: var(--danger);
     border: 1px solid rgba(194,80,63,0.25);
-  }
-
-  .placeholder-note {
-    color: var(--text-dim);
-    font-size: 13px;
-    font-family: var(--font-mono);
-    padding: 8px 0;
-  }
-
-  footer {
-    text-align: center;
-    color: #545a5f;
-    font-size: 11px;
-    margin-top: 24px;
-    font-family: var(--font-mono);
   }
 
   button.reset {
@@ -247,11 +170,9 @@
     padding: 10px 14px;
     border-radius: 6px;
     cursor: pointer;
-    margin-top: 4px;
     -webkit-tap-highlight-color: transparent;
   }
-  button.reset:hover,
-  button.reset:active {
+  button.reset:hover, button.reset:active {
     border-color: var(--amber);
     color: var(--amber-bright);
   }
@@ -266,6 +187,8 @@
 
 <script type="text/babel">
 const { useState, useMemo } = React;
+const PRECISION = 4;
+const TOLERANCE = 0.001;
 
 function parseNum(v) {
   if (v === "" || v === null || v === undefined) return null;
@@ -275,10 +198,10 @@ function parseNum(v) {
 
 function fmt(n) {
   if (n === null) return "—";
-  return n.toFixed(2) + " g";
+  return n.toFixed(PRECISION) + " g";
 }
 
-function Field({ label, hint, value, onChange, placeholder }) {
+function Field({ label, value, onChange, placeholder }) {
   return (
     <div className="field">
       <label>{label}</label>
@@ -286,25 +209,21 @@ function Field({ label, hint, value, onChange, placeholder }) {
         <input
           type="number"
           inputMode="decimal"
-          step="0.01"
+          step="any"
           placeholder={placeholder}
           value={value}
           onChange={(e) => onChange(e.target.value)}
         />
         <span className="unit">g</span>
       </div>
-      {hint && <div className="hint">{hint}</div>}
     </div>
   );
 }
 
-function Readout({ label, tag, value, negative }) {
+function Readout({ label, value, negative }) {
   return (
     <div className="readout">
-      <div className="label">
-        {label}
-        {tag && <span className="tag">{tag}</span>}
-      </div>
+      <div className="label">{label}</div>
       <div className={"value" + (negative ? " negative" : "")}>{fmt(value)}</div>
     </div>
   );
@@ -312,18 +231,17 @@ function Readout({ label, tag, value, negative }) {
 
 function App() {
   const [bulk, setBulk] = useState("");
-  const [js, setJs] = useState("");
-  const [sjs, setSjs] = useState("");
-  const [fjs, setFjs] = useState("");
+  const [full, setFull] = useState("");
+  const [mid, setMid] = useState("");
+  const [empty, setEmpty] = useState("");
 
   const b = parseNum(bulk);
-  const j = parseNum(js);
-  const s = parseNum(sjs);
-  const f = parseNum(fjs);
+  const j = parseNum(full);
+  const s = parseNum(mid);
+  const f = parseNum(empty);
 
   const results = useMemo(() => {
     if (b === null || j === null) return null;
-
     const tare = j - b;
     const pour1 = s !== null ? j - s : null;
     const pour2 = s !== null && f !== null ? s - f : null;
@@ -331,116 +249,46 @@ function App() {
     const total = pour1 !== null && pour2 !== null && waste !== null
       ? pour1 + pour2 + waste
       : null;
-    const diff = total !== null ? total - b : null;
-
-    return { tare, pour1, pour2, waste, total, diff };
+    const checksOut = total !== null ? Math.abs(total - b) < TOLERANCE : null;
+    return { pour1, pour2, waste, checksOut };
   }, [b, j, s, f]);
 
   function reset() {
-    setBulk(""); setJs(""); setSjs(""); setFjs("");
+    setBulk(""); setFull(""); setMid(""); setEmpty("");
   }
 
   return (
     <div className="sheet">
       <header>
-        <div className="eyebrow">Fill Line · Pour Log</div>
-        <h1>Pour Split Calculator</h1>
-        <p className="sub">
-          Enter the four scale readings from a two-machine pour. Amount poured
-          into each machine and leftover jar waste are computed automatically.
-        </p>
+        <h1>Two Machines One Jar Calculator</h1>
       </header>
 
       <div className="panel">
-        <h2>Scale Readings</h2>
-        <Field
-          label="Bulk weight"
-          hint="Total product weight, jar empty of packaging"
-          value={bulk}
-          onChange={setBulk}
-          placeholder="e.g. 850.00"
-        />
-        <Field
-          label="Jar + spatula weight"
-          hint="Full jar, before any pouring"
-          value={js}
-          onChange={setJs}
-          placeholder="e.g. 920.50"
-        />
-        <Field
-          label="Second jar + spatula weight"
-          hint="After pouring into machine 1"
-          value={sjs}
-          onChange={setSjs}
-          placeholder="e.g. 550.20"
-        />
-        <Field
-          label="Final jar + spatula weight"
-          hint="After pouring into machine 2"
-          value={fjs}
-          onChange={setFjs}
-          placeholder="e.g. 180.75"
-        />
+        <Field label="Bulk Weight:" value={bulk} onChange={setBulk} placeholder="0.0000" />
+        <Field label="Jar + Spatula Weight (Full)" value={full} onChange={setFull} placeholder="0.0000" />
+        <Field label="Jar + Spatula Weight (Intermediate)" value={mid} onChange={setMid} placeholder="0.0000" />
+        <Field label="Jar + Spatula Weight (Empty)" value={empty} onChange={setEmpty} placeholder="0.0000" />
       </div>
 
       <div className="panel">
-        <h2>Results</h2>
         {!results && (
-          <div className="placeholder-note">
-            Enter at least Bulk weight and Jar + spatula weight to begin.
-          </div>
+          <div className="placeholder-note">Enter Bulk Weight and Full Jar + Spatula Weight to begin.</div>
         )}
         {results && (
           <React.Fragment>
-            <Readout
-              label="Tare (empty jar + spatula)"
-              tag="JAR &amp; SPATULA − BULK"
-              value={results.tare}
-              negative={results.tare < 0}
-            />
-            <Readout
-              label="Poured into machine 1"
-              tag="JAR &amp; SPATULA − SECOND"
-              value={results.pour1}
-              negative={results.pour1 !== null && results.pour1 < 0}
-            />
-            <Readout
-              label="Poured into machine 2"
-              tag="SECOND − FINAL"
-              value={results.pour2}
-              negative={results.pour2 !== null && results.pour2 < 0}
-            />
-            <Readout
-              label="Jar waste (unusable leftover)"
-              tag="FINAL − TARE"
-              value={results.waste}
-              negative={results.waste !== null && results.waste < 0}
-            />
-            <div className="readout total">
-              <div className="label">Accounted total</div>
-              <div className="value">{fmt(results.total)}</div>
-            </div>
-
-            {results.total !== null && (
-              Math.abs(results.diff) < 0.05 ? (
-                <div className="check ok">
-                  <span>✓ balances against bulk weight</span>
-                  <span>{results.diff >= 0 ? "+" : ""}{results.diff.toFixed(2)} g</span>
-                </div>
-              ) : (
-                <div className="check warn">
-                  <span>⚠ off from bulk weight — re-check readings</span>
-                  <span>{results.diff >= 0 ? "+" : ""}{results.diff.toFixed(2)} g</span>
-                </div>
-              )
+            <Readout label="Amount in Machine One:" value={results.pour1} negative={results.pour1 !== null && results.pour1 < 0} />
+            <Readout label="Amount in Machine Two:" value={results.pour2} negative={results.pour2 !== null && results.pour2 < 0} />
+            <Readout label="Jar Waste:" value={results.waste} negative={results.waste !== null && results.waste < 0} />
+            {results.checksOut !== null && (
+              <div className={"check " + (results.checksOut ? "ok" : "warn")}>
+                {results.checksOut ? "✓ math checks out" : "⚠ math does not check out"}
+              </div>
             )}
           </React.Fragment>
         )}
       </div>
 
       <button className="reset" onClick={reset}>Clear all fields</button>
-
-      <footer>tare, pour, waste — all in grams</footer>
     </div>
   );
 }
