@@ -282,10 +282,6 @@ function App() {
             <Readout label="Amount in Machine One:" value={results.pour1} negative={results.pour1 !== null && results.pour1 < 0} />
             <Readout label="Amount in Machine Two:" value={results.pour2} negative={results.pour2 !== null && results.pour2 < 0} />
             <Readout label="Jar Waste:" value={results.waste} negative={results.waste !== null && results.waste < 0} />
-            {results.checksOut !== null && (
-              <div className={"check " + (results.checksOut ? "ok" : "warn")}>
-                {results.checksOut ? "✓ math checks out" : "⚠ math does not check out"}
-              </div>
             )}
           </React.Fragment>
         )}
